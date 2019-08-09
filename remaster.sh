@@ -98,8 +98,6 @@ sudo rm extract-cd/casper/initrd
 sudo cp edit/boot/initrd.img-$(ls edit/lib/modules) extract-cd/casper/initrd
 sudo rm edit/boot/initrd.img-*
 
-sudo rm edit/root/.bash_history
-
 echo "Repacking..."
 
 sudo chmod +w extract-cd/casper/filesystem.manifest
