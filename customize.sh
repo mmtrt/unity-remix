@@ -5,22 +5,22 @@
 # echo "# Remastered" >> /etc/os-release # Don't do this, it disturbs add-apt-repository
 
 echo "In chroot: removing libreoffice-help-xx..."
-sudo apt-get autoremove --purge -f -q -y libreoffice-help-de libreoffice-help-en-gb libreoffice-help-es libreoffice-help-fr libreoffice-help-it libreoffice-help-pt-br libreoffice-help-pt libreoffice-help-ru libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-l10n-es libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt-br libreoffice-l10n-pt libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw
+sudo apt-get autoremove --purge -f -q -y libreoffice*
 
 echo "In chroot: removing firefox-locale-xx..."
-sudo apt-get autoremove --purge -f -q -y firefox-locale-de firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans thunderbird-locale-de thunderbird-locale-en-gb thunderbird-locale-es-ar thunderbird-locale-es-es thunderbird-locale-es thunderbird-locale-fr thunderbird-locale-it thunderbird-locale-pt-br thunderbird-locale-pt-pt thunderbird-locale-pt thunderbird-locale-ru thunderbird-locale-zh-cn thunderbird-locale-zh-hans thunderbird-locale-zh-hant thunderbird-locale-zh-tw
+sudo apt-get autoremove --purge -f -q -y firefox-locale-de firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans thunderbird*
 
 echo "In chroot: removing mythes-xx..."
-sudo apt-get autoremove --purge -f -q -y mythes-de-ch mythes-de mythes-en-au mythes-es mythes-fr mythes-it mythes-pt-pt mythes-ru
+sudo apt-get autoremove --purge -f -q -y mythes*
 
 echo "In chroot: removing hunspell-xx..."
-sudo apt-get autoremove --purge -f -q -y hunspell-de-at-frami hunspell-de-ch-frami hunspell-de-de-frami hunspell-en-au hunspell-en-ca hunspell-en-gb hunspell-en-za hunspell-es hunspell-fr-classical hunspell-fr hunspell-it hunspell-pt-br hunspell-pt-pt hunspell-ru
+sudo apt-get autoremove --purge -f -q -y hunspell*
 
 echo "In chroot: removing language-pack-xx..."
 sudo apt-get autoremove --purge -f -q -y language-pack-de-base language-pack-de language-pack-es-base language-pack-es language-pack-fr-base language-pack-fr language-pack-gnome-de-base language-pack-gnome-de language-pack-gnome-es-base language-pack-gnome-es language-pack-gnome-fr-base language-pack-gnome-fr language-pack-gnome-it-base language-pack-gnome-it language-pack-gnome-pt-base language-pack-gnome-pt language-pack-gnome-ru-base language-pack-gnome-ru language-pack-gnome-zh-hans-base language-pack-gnome-zh-hans language-pack-it-base language-pack-it language-pack-pt-base language-pack-pt language-pack-ru-base language-pack-ru language-pack-zh-hans-base language-pack-zh-hans
 
 echo "In chroot: removing hyphen-xx..."
-sudo apt-get autoremove --purge -f -q -y hyphen-de hyphen-en-ca hyphen-en-gb hyphen-es hyphen-fr hyphen-it hyphen-pt-br hyphen-pt-pt hyphen-ru
+sudo apt-get autoremove --purge -f -q -y hyphen*
 
 echo "In chroot: removing web launchers..."
 sudo apt-get autoremove --purge -f -q -y ubuntu-web-*
@@ -32,36 +32,5 @@ echo "In chroot: disabling apt ipv6..."
 sudo bash -c "echo net.ipv6.conf.all.disable_ipv6=1 >> /etc/sysctl.conf"
 sudo bash -c "echo net.ipv6.conf.default.disable_ipv6=1 >> /etc/sysctl.conf"
 
-echo "In chroot: adding libreoffice ppa..."
-sudo -E add-apt-repository -y ppa:libreoffice/ppa
-
-echo "In chroot: adding smplayer ppa..."
-sudo -E add-apt-repository -y ppa:rvm/smplayer
-
-echo "In chroot: adding ffmpeg-4 ppa..."
-sudo -E add-apt-repository -y ppa:jonathonf/ffmpeg-4
-
-echo "In chroot: adding mpv ppa..."
-sudo -E add-apt-repository -y ppa:mc3man/mpv-tests
-
-echo "In chroot: adding cybermax's ppas..."
-sudo -E add-apt-repository -y ppa:cybermax-dexter/vulkan-backports
-sudo -E add-apt-repository -y ppa:cybermax-dexter/sdl2-backport
-
-echo "In chroot: adding nvidia drivers ppa..."
-sudo -E add-apt-repository -y ppa:graphics-drivers/ppa
-
-echo "In chroot: installing winehq ppa + winehq..."
-wget -nc https://dl.winehq.org/wine-builds/winehq.key
-sudo apt-key add winehq.key
-sudo -E add-apt-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
-sudo rm winehq.key
-
 echo "In chroot: apt upgrade..."
 sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-
-echo "In chroot: apt smplayer winehq..."
-sudo apt-get -y install smplayer smplayer-themes && sudo apt-get install -y --install-recommends winehq-staging
-
-echo "In chroot: install nv drivers..."
-sudo apt-get install -y nvidia-driver-430 libvulkan1 libvulkan1:i386

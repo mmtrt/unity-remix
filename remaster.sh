@@ -44,22 +44,6 @@ sudo chroot edit <<EOF
 echo "In chroot: adding i386 support..."
 sudo dpkg --add-architecture i386
 
-echo "In chroot: enabling universe repo..."
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic universe >> /etc/apt/sources.list"
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe >> /etc/apt/sources.list"
-
-echo "In chroot: adding unity7 ppa..."
-sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
-
-echo "In chroot: remove gdm3..."
-sudo apt-get autoremove --purge -f -q -y gdm3
-
-echo "In chroot: install unity7..."
-sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity-tweak-tool
-
-echo "In chroot: remove ubuntu-desktop..."
-sudo apt-get autoremove --purge -f -q -y gnome-shell ubuntu-desktop yaru* *mutter*
-
 echo "In chroot: remove snapd..."
 sudo apt-get autoremove --purge -f -q -y snapd
 
@@ -147,4 +131,4 @@ echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*amd64.iso.zsync" | dd of
 # Write zsync file
 zsyncmake *.iso
 
-ls -lh *.iso
+ls -al
