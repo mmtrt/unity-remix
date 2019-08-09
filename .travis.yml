@@ -6,16 +6,6 @@ sudo: required
 git:
   depth: 1
 
-addons:
-  apt:
-    update: false
-    packages:
-      - squashfs-tools
-      - genisoimage
-      - zsync
-      - isolinux
-      - xorriso
-  
 script:
   - bash -ex ./remaster.sh |& tee log.txt
 
