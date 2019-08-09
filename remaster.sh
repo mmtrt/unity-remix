@@ -4,7 +4,7 @@ sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-too
 
 echo "Download the ISO to be customized..."
 URL=http://releases.ubuntu.com/bionic/ubuntu-18.04.3-desktop-amd64.iso
-wget -q "$URL"
+wget "$URL"
 
 mv *.iso original.iso
 
@@ -52,7 +52,7 @@ echo "In chroot: adding unity7 ppa..."
 sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
 
 echo "In chroot: remove gnome all..."
-sudo apt-get autoremove --purge -f -q -y *gdm3* *gnome-shell* *ubuntu-desktop* *yaru* *mutter* *gnome*
+sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
 
 echo "In chroot: install unity7..."
 sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity-tweak-tool
