@@ -135,9 +135,13 @@ sudo xorriso -as mkisofs \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
+ls -al
+
 cd ..
 
 rm original.iso
+
+ls -al
 
 # Write update information for use by AppImageUpdate; https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
 echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*amd64.iso.zsync" | dd of="unity-remix-18.04.3-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
