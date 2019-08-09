@@ -82,7 +82,6 @@ sudo rm /var/cache/apt/*.bin
 sudo rm /var/cache/apt/archives/*.deb
 sudo rm /var/lib/dpkg/{diversions-old,status-old}
 sudo rm /etc/hosts && sudo touch /etc/hosts
-sudo rm ~/.bash_history
 exit
 EOF
 
@@ -98,6 +97,8 @@ echo "Copying initramfs to casper..."
 sudo rm extract-cd/casper/initrd
 sudo cp edit/boot/initrd.img-$(ls edit/lib/modules) extract-cd/casper/initrd
 sudo rm edit/boot/initrd.img-*
+
+sudo rm edit/root/.bash_history
 
 echo "Repacking..."
 
