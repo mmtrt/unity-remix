@@ -4,26 +4,23 @@
 
 # echo "# Remastered" >> /etc/os-release # Don't do this, it disturbs add-apt-repository
 
-echo "In chroot: removing libreoffice..."
-sudo apt-get autoremove --purge -f -q -y libreoffice*
+echo "In chroot: removing libreoffice-help-xx..."
+sudo apt-get autoremove --purge -f -q -y libreoffice-help-de libreoffice-help-en-gb libreoffice-help-es libreoffice-help-fr libreoffice-help-it libreoffice-help-pt-br libreoffice-help-pt libreoffice-help-ru libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-l10n-es libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt-br libreoffice-l10n-pt libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw
 
-echo "In chroot: removing firefox thunderbird..."
-sudo apt-get autoremove --purge -f -q -y firefox* thunderbird*
+echo "In chroot: removing firefox-locale-xx..."
+sudo apt-get autoremove --purge -f -q -y firefox-locale-de firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans thunderbird-locale-de thunderbird-locale-en-gb thunderbird-locale-es-ar thunderbird-locale-es-es thunderbird-locale-es thunderbird-locale-fr thunderbird-locale-it thunderbird-locale-pt-br thunderbird-locale-pt-pt thunderbird-locale-pt thunderbird-locale-ru thunderbird-locale-zh-cn thunderbird-locale-zh-hans thunderbird-locale-zh-hant thunderbird-locale-zh-tw
 
-echo "In chroot: removing mythes..."
-sudo apt-get autoremove --purge -f -q -y mythes*
+echo "In chroot: removing mythes-xx..."
+sudo apt-get autoremove --purge -f -q -y mythes-de-ch mythes-de mythes-en-au mythes-es mythes-fr mythes-it mythes-pt-pt mythes-ru
 
-echo "In chroot: removing hunspell..."
-sudo apt-get autoremove --purge -f -q -y hunspell*
-
-echo "In chroot: removing preinstalled apps..."
-sudo apt-get autoremove --purge -f -q -y rhythmbox* remmina* totem* transmission* aisleriot* gnome-mahjongg* gnome-mines* gnome-sudoku* simple-scan* gnome-todo* baobab* deja-dup* gnome-calendar* gnome-terminal* example-content* usb-creator-gtk* cheese cheese-common
+echo "In chroot: removing hunspell-xx..."
+sudo apt-get autoremove --purge -f -q -y hunspell-de-at-frami hunspell-de-ch-frami hunspell-de-de-frami hunspell-en-au hunspell-en-ca hunspell-en-gb hunspell-en-za hunspell-es hunspell-fr-classical hunspell-fr hunspell-it hunspell-pt-br hunspell-pt-pt hunspell-ru
 
 echo "In chroot: removing language-pack-xx..."
 sudo apt-get autoremove --purge -f -q -y language-pack-de-base language-pack-de language-pack-es-base language-pack-es language-pack-fr-base language-pack-fr language-pack-gnome-de-base language-pack-gnome-de language-pack-gnome-es-base language-pack-gnome-es language-pack-gnome-fr-base language-pack-gnome-fr language-pack-gnome-it-base language-pack-gnome-it language-pack-gnome-pt-base language-pack-gnome-pt language-pack-gnome-ru-base language-pack-gnome-ru language-pack-gnome-zh-hans-base language-pack-gnome-zh-hans language-pack-it-base language-pack-it language-pack-pt-base language-pack-pt language-pack-ru-base language-pack-ru language-pack-zh-hans-base language-pack-zh-hans
 
-echo "In chroot: removing hyphen..."
-sudo apt-get autoremove --purge -f -q -y hyphen*
+echo "In chroot: removing hyphen-xx..."
+sudo apt-get autoremove --purge -f -q -y hyphen-de hyphen-en-ca hyphen-en-gb hyphen-es hyphen-fr hyphen-it hyphen-pt-br hyphen-pt-pt hyphen-ru
 
 echo "In chroot: removing web launchers..."
 sudo apt-get autoremove --purge -f -q -y ubuntu-web-*
