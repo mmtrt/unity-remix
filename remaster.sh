@@ -41,9 +41,6 @@ echo "Entering chroot..."
 
 sudo chroot edit <<EOF
 
-echo "In chroot: adding i386 support..."
-sudo dpkg --add-architecture i386
-
 echo "In chroot: enabling universe repo..."
 sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic universe >> /etc/apt/sources.list"
 sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe >> /etc/apt/sources.list"
@@ -51,26 +48,26 @@ sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe
 echo "In chroot: adding unity7 ppa..."
 sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
 
-echo "In chroot: remove gdm3..."
-sudo apt-get autoremove --purge -f -q -y gdm3
+echo "In chroot: adding libreoffice ppa..."
+sudo -E add-apt-repository -y ppa:libreoffice/ppa
+
+echo "In chroot: remove gnome all..."
+sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
 
 echo "In chroot: install unity7..."
 sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity-tweak-tool
 
-echo "In chroot: remove ubuntu-desktop..."
-sudo apt-get autoremove --purge -f -q -y gnome-shell ubuntu-desktop yaru* *mutter*
+echo "In chroot: remove auto installed deps..."
+sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5
 
-echo "In chroot: remove snapd..."
-sudo apt-get autoremove --purge -f -q -y snapd
+echo "In chroot: apt commands..."
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove && sudo apt-get autoclean
 
 echo "In chroot: Run customization script..."
 chmod +x customize.sh && ./customize.sh && rm ./customize.sh
 
 echo "In chroot: Delete temporary files..."
 ( cd /etc ; sudo rm resolv.conf ; sudo ln -s ../run/systemd/resolve/stub-resolv.conf resolv.conf )
-
-echo "In chroot: Clearing apt cache..."
-sudo apt-get -y autoremove && sudo apt-get autoclean
 
 echo "In chroot: Clearing cache files..."
 rm -rf /tmp/*
@@ -133,13 +130,9 @@ sudo xorriso -as mkisofs \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
-ls -al
-
 cd ..
 
 rm original.iso
-
-ls -al
 
 # Write update information for use by AppImageUpdate; https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
 echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*amd64.iso.zsync" | dd of="unity-remix-18.04.3-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
