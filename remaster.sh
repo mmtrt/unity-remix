@@ -3,7 +3,7 @@
 sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-tools xorriso zsync
 
 echo "Download the ISO to be customized..."
-URL=http://releases.ubuntu.com/bionic/ubuntu-18.04.3-desktop-amd64.iso
+URL=http://cdimage.ubuntu.com/daily-live/current/eoan-desktop-amd64.iso
 wget -q "$URL"
 
 mv *.iso original.iso
@@ -45,8 +45,8 @@ echo "In chroot: adding i386 support..."
 sudo dpkg --add-architecture i386
 
 echo "In chroot: enabling universe repo..."
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic universe >> /etc/apt/sources.list"
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe >> /etc/apt/sources.list"
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ eoan universe >> /etc/apt/sources.list"
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ eoan-updates universe >> /etc/apt/sources.list"
 
 echo "In chroot: adding unity7 ppa..."
 sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
@@ -77,6 +77,7 @@ rm -rf /tmp/*
 sudo rm /etc/apt/sources.list.save
 sudo rm /etc/{group-,gshadow-,passwd-,shadow-}
 sudo rm -rf /var/cache/apparmor/*
+sudo rm /var/cache/app-info/cache/en_US.cache
 sudo rm /var/cache/debconf/{config.dat-old,templates.dat-old}
 sudo rm /var/cache/apt/*.bin
 sudo rm /var/cache/apt/archives/*.deb
@@ -118,7 +119,7 @@ HERE
 
 cd extract-cd 	
 sudo xorriso -as mkisofs \
-	-V "Unity Remix 18.04.3 LTS amd64" \
+	-V "Unity Remix 19.10 amd64" \
 	-isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
 	-c isolinux/boot.cat \
 	-b isolinux/isolinux.bin \
@@ -129,7 +130,7 @@ sudo xorriso -as mkisofs \
 	-e boot/grub/efi.img \
 	-no-emul-boot \
 	-isohybrid-gpt-basdat \
-	-o ../unity-remix-18.04.3-desktop-amd64.iso \
+	-o ../unity-remix-eoan-desktop-amd64.iso \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
@@ -138,7 +139,7 @@ cd ..
 rm original.iso
 
 # Write update information for use by AppImageUpdate; https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
-echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*amd64.iso.zsync" | dd of="unity-remix-18.04.3-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
+echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*amd64.iso.zsync" | dd of="unity-remix-eoan-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
 
 # Write zsync file
 zsyncmake *.iso
