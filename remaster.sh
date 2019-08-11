@@ -4,7 +4,7 @@ sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-too
 
 echo "Download the ISO to be customized..."
 URL=http://releases.ubuntu.com/bionic/ubuntu-18.04.3-desktop-amd64.iso
-wget "$URL"
+wget -q "$URL"
 
 mv *.iso original.iso
 
