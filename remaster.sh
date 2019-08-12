@@ -72,6 +72,9 @@ sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade &
 echo "In chroot: Run customization script..."
 chmod +x customize.sh && ./customize.sh && rm ./customize.sh
 
+echo "In chroot: rebuilding font cache..."
+sudo fc-cache -r -f -s -v
+
 echo "In chroot: rebuilding mime cache..."
 sudo update-mime-database -V /usr/share/mime
 
