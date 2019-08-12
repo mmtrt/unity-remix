@@ -63,6 +63,9 @@ sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandcl
 echo "In chroot: re installing hwe drivers..."
 sudo apt-get -y install xserver-xorg-core-hwe-18.04 xserver-xorg-hwe-18.04 xserver-xorg-input-all-hwe-18.04 xserver-xorg-input-libinput-hwe-18.04 xserver-xorg-input-wacom-hwe-18.04 xserver-xorg-legacy-hwe-18.04 xserver-xorg-video-all-hwe-18.04 xserver-xorg-video-amdgpu-hwe-18.04 xserver-xorg-video-ati-hwe-18.04 xserver-xorg-video-fbdev-hwe-18.04 xserver-xorg-video-intel-hwe-18.04 xserver-xorg-video-nouveau-hwe-18.04 xserver-xorg-video-qxl-hwe-18.04 xserver-xorg-video-radeon-hwe-18.04 xserver-xorg-video-vesa-hwe-18.04 xserver-xorg-video-vmware-hwe-18.04
 
+echo "In chroot: installing xdpi fonts..."
+sudo apt-get -y install xfonts-75dpi xfonts-100dpi
+
 echo "In chroot: apt commands..."
 sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove && sudo apt-get autoclean
 
