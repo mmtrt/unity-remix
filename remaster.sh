@@ -102,6 +102,9 @@ sudo umount -lfr edit/sys
 sudo umount -lfr edit/dev
 sudo umount -lfr edit/run
 
+ls edit/lib/modules
+ls edit/boot
+
 echo "Copying initramfs to casper..."
 sudo rm extract-cd/casper/{initrd,vmlinuz}
 sudo cp edit/boot/initrd.img-$(ls edit/lib/modules | tail -1) extract-cd/casper/initrd
