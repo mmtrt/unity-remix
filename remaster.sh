@@ -58,7 +58,7 @@ echo "In chroot: install unity7..."
 sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity-tweak-tool
 
 echo "In chroot: remove auto installed deps..."
-sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5
+sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5 gnome-control*
 
 echo "In chroot: re installing hwe drivers..."
 sudo apt-get -y install xserver-xorg-core-hwe-18.04 xserver-xorg-hwe-18.04 xserver-xorg-input-all-hwe-18.04 xserver-xorg-input-libinput-hwe-18.04 xserver-xorg-input-wacom-hwe-18.04 xserver-xorg-legacy-hwe-18.04 xserver-xorg-video-all-hwe-18.04 xserver-xorg-video-amdgpu-hwe-18.04 xserver-xorg-video-ati-hwe-18.04 xserver-xorg-video-fbdev-hwe-18.04 xserver-xorg-video-intel-hwe-18.04 xserver-xorg-video-nouveau-hwe-18.04 xserver-xorg-video-qxl-hwe-18.04 xserver-xorg-video-radeon-hwe-18.04 xserver-xorg-video-vesa-hwe-18.04 xserver-xorg-video-vmware-hwe-18.04
