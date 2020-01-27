@@ -31,8 +31,3 @@ sudo apt-get autoremove --purge -f -q -y fonts-beng fonts-beng-extra fonts-deva 
 echo "In chroot: disabling apt ipv6..."
 sudo bash -c "echo net.ipv6.conf.all.disable_ipv6=1 >> /etc/sysctl.conf"
 sudo bash -c "echo net.ipv6.conf.default.disable_ipv6=1 >> /etc/sysctl.conf"
-
-echo "In chroot: apt upgrade..."
-sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-echo "In chroot: install nv drivers..."
-sudo apt-get install -y nvidia-driver-430 libvulkan1:i386
