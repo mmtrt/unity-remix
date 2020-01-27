@@ -57,9 +57,6 @@ sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity
 echo "In chroot: remove auto installed deps..."
 sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5
 
-echo "In chroot: installing xdpi fonts..."
-sudo apt-get -y install xfonts-75dpi xfonts-100dpi
-
 echo "In chroot: apt commands..."
 sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove && sudo apt-get autoclean
 
