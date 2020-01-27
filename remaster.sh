@@ -3,7 +3,7 @@
 sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-tools xorriso zsync
 
 echo "Download the ISO to be customized..."
-URL=http://releases.ubuntu.com/bionic/ubuntu-18.04.3-desktop-amd64.iso
+URL=http://cdimage.ubuntu.com/daily-live/current/focal-desktop-amd64.iso
 wget -q "$URL"
 
 mv *.iso original.iso
@@ -42,14 +42,11 @@ echo "Entering chroot..."
 sudo chroot edit <<EOF
 
 echo "In chroot: enabling universe repo..."
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic universe >> /etc/apt/sources.list"
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe >> /etc/apt/sources.list"
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal universe >> /etc/apt/sources.list"
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal-updates universe >> /etc/apt/sources.list"
 
-echo "In chroot: adding unity7 ppa..."
-sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
-
-echo "In chroot: adding libreoffice ppa..."
-sudo -E add-apt-repository -y ppa:libreoffice/ppa
+# echo "In chroot: adding unity7 ppa..."
+# sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
 
 echo "In chroot: remove gnome all..."
 sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
@@ -59,9 +56,6 @@ sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity
 
 echo "In chroot: remove auto installed deps..."
 sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5
-
-echo "In chroot: re installing hwe drivers..."
-sudo apt-get -y install xserver-xorg-core-hwe-18.04 xserver-xorg-hwe-18.04 xserver-xorg-input-all-hwe-18.04 xserver-xorg-input-libinput-hwe-18.04 xserver-xorg-input-wacom-hwe-18.04 xserver-xorg-legacy-hwe-18.04 xserver-xorg-video-all-hwe-18.04 xserver-xorg-video-amdgpu-hwe-18.04 xserver-xorg-video-ati-hwe-18.04 xserver-xorg-video-fbdev-hwe-18.04 xserver-xorg-video-intel-hwe-18.04 xserver-xorg-video-nouveau-hwe-18.04 xserver-xorg-video-qxl-hwe-18.04 xserver-xorg-video-radeon-hwe-18.04 xserver-xorg-video-vesa-hwe-18.04 xserver-xorg-video-vmware-hwe-18.04
 
 echo "In chroot: installing xdpi fonts..."
 sudo apt-get -y install xfonts-75dpi xfonts-100dpi
@@ -89,6 +83,7 @@ rm -rf /tmp/*
 sudo rm /etc/apt/sources.list.save
 sudo rm /etc/{group-,gshadow-,passwd-,shadow-}
 sudo rm -rf /var/cache/apparmor/*
+sudo rm /var/cache/app-info/cache/en_US.cache
 sudo rm /var/cache/debconf/{config.dat-old,templates.dat-old}
 sudo rm /var/cache/apt/*.bin
 sudo rm /var/cache/apt/archives/*.deb
@@ -134,7 +129,7 @@ HERE
 
 cd extract-cd 	
 sudo xorriso -as mkisofs \
-	-V "Unity Remix 18.04.3 LTS amd64" \
+	-V "Unity Remix focal LTS amd64" \
 	-isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
 	-c isolinux/boot.cat \
 	-b isolinux/isolinux.bin \
@@ -145,7 +140,7 @@ sudo xorriso -as mkisofs \
 	-e boot/grub/efi.img \
 	-no-emul-boot \
 	-isohybrid-gpt-basdat \
-	-o ../unity-remix-18.04.3-desktop-amd64.iso \
+	-o ../unity-remix-focal-desktop-amd64.iso \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
@@ -154,7 +149,7 @@ cd ..
 rm original.iso
 
 # Write update information for use by AppImageUpdate; https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
-echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*18.04.3*.iso.zsync" | dd of="unity-remix-18.04.3-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
+echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*focal*.iso.zsync" | dd of="unity-remix-focal-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
 
 # Write zsync file
 zsyncmake *.iso
