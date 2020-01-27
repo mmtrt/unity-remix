@@ -44,9 +44,7 @@ sudo chroot edit <<EOF
 echo "In chroot: enabling universe repo..."
 sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal universe >> /etc/apt/sources.list"
 sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal-updates universe >> /etc/apt/sources.list"
-
-# echo "In chroot: adding unity7 ppa..."
-# sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
+sudo apt-get update
 
 echo "In chroot: remove gnome all..."
 sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
