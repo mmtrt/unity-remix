@@ -4,7 +4,7 @@ sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-too
 
 echo "Download the ISO to be customized..."
 URL=http://cdimage.ubuntu.com/daily-live/current/focal-desktop-amd64.iso
-wget -q "$URL" --show-progress
+wget -q "$URL"
 
 mv *.iso original.iso
 
