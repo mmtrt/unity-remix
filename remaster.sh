@@ -4,7 +4,7 @@ sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-too
 
 echo "Download the ISO to be customized..."
 URL=http://cdimage.ubuntu.com/daily-live/current/focal-desktop-amd64.iso
-wget -q "$URL" --show-progress
+wget "$URL" --progress=dot -e dotbytes=100M
 
 mv *.iso original.iso
 
@@ -46,9 +46,6 @@ sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal universe >> /etc/
 sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal-updates universe >> /etc/apt/sources.list"
 sudo apt-get update
 
-# echo "In chroot: remove gnome all..."
-# sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
-
 echo "In chroot: remove gdm3..."
 sudo apt-get autoremove --purge -f -q -y gdm3
 
@@ -58,8 +55,8 @@ sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity
 echo "In chroot: remove ubuntu-desktop..."
 sudo apt-get autoremove --purge -f -q -y gnome-shell* ubuntu-desktop yaru* mutter*
 
-echo "In chroot: remove auto installed deps..."
-sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5
+echo "In chroot: remove snapd..."
+sudo apt-get autoremove --purge -f -q -y snapd
 
 echo "In chroot: apt commands..."
 sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove && sudo apt-get autoclean
