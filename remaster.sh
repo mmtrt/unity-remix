@@ -55,6 +55,9 @@ sudo apt-get autoremove --purge -f -q -y gdm3
 echo "In chroot: install unity7..."
 sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity-tweak-tool
 
+echo "In chroot: remove ubuntu-desktop..."
+sudo apt-get autoremove --purge -f -q -y gnome-shell* ubuntu-desktop yaru* mutter*
+
 echo "In chroot: remove auto installed deps..."
 sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5
 
