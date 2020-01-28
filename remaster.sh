@@ -4,7 +4,7 @@ sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-too
 
 echo "Download the ISO to be customized..."
 URL=http://releases.ubuntu.com/eoan/ubuntu-19.10-desktop-amd64.iso
-wget -q "$URL" --progress=dot -e dotbytes=100M
+wget "$URL" --progress=dot -e dotbytes=100M
 
 mv *.iso original.iso
 
