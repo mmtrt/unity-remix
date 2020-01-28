@@ -46,8 +46,11 @@ sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal universe >> /etc/
 sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal-updates universe >> /etc/apt/sources.list"
 sudo apt-get update
 
-echo "In chroot: remove gnome all..."
-sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
+# echo "In chroot: remove gnome all..."
+# sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
+
+echo "In chroot: remove gdm3..."
+sudo apt-get autoremove --purge -f -q -y gdm3
 
 echo "In chroot: install unity7..."
 sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity-tweak-tool
