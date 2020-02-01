@@ -3,8 +3,8 @@
 sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-tools xorriso zsync
 
 echo "Download the ISO to be customized..."
-URL=http://releases.ubuntu.com/bionic/ubuntu-18.04.3-desktop-amd64.iso
-wget -q "$URL"
+URL=http://cdimage.ubuntu.com/daily-live/current/focal-desktop-amd64.iso
+wget "$URL" --progress=dot -e dotbytes=100M
 
 mv *.iso original.iso
 
@@ -41,42 +41,47 @@ echo "Entering chroot..."
 
 sudo chroot edit <<EOF
 
-echo "In chroot: adding i386 support..."
-sudo dpkg --add-architecture i386
-
 echo "In chroot: enabling universe repo..."
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic universe >> /etc/apt/sources.list"
-sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe >> /etc/apt/sources.list"
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal universe >> /etc/apt/sources.list"
+sudo bash -c "echo deb http://archive.ubuntu.com/ubuntu/ focal-updates universe >> /etc/apt/sources.list"
+sudo apt-get update
 
-echo "In chroot: adding unity7 ppa..."
-sudo -E add-apt-repository -y ppa:unity7maintainers/unity7-desktop
-
-echo "In chroot: remove gnome all..."
-sudo apt-get autoremove --purge -f -q -y gdm3 gnome-shell* ubuntu-desktop yaru* mutter* *gnome*
+echo "In chroot: remove gdm3..."
+sudo apt-get autoremove --purge -f -q -y gdm3
 
 echo "In chroot: install unity7..."
 sudo apt-get -y install ubuntu-unity-desktop compizconfig-settings-manager unity-tweak-tool
 
-echo "In chroot: remove auto installed deps..."
-sudo apt-get autoremove --purge -f -q -y libqt5qml5 libqt5quick5 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5
+echo "In chroot: remove ubuntu-desktop..."
+sudo apt-get autoremove --purge -f -q -y gnome-shell* ubuntu-desktop yaru* mutter*
 
 echo "In chroot: remove snapd..."
 sudo apt-get autoremove --purge -f -q -y snapd
 
+echo "In chroot: apt commands..."
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y autoremove && sudo apt-get autoclean
+
 echo "In chroot: Run customization script..."
 chmod +x customize.sh && ./customize.sh && rm ./customize.sh
 
+echo "In chroot: rebuilding font cache..."
+sudo fc-cache -r -f -s -v
+
+echo "In chroot: rebuilding mime cache..."
+sudo update-mime-database -V /usr/share/mime
+
+echo "In chroot: remove old kernel remains..."
+sudo apt-get purge -y linux-headers-$(ls edit/lib/modules | head -1 | sed 's|-g.*||') linux-headers-$(ls edit/lib/modules | head -1) linux-image-$(ls edit/lib/modules | head -1) linux-modules-$(ls edit/lib/modules | head -1) linux-modules-extra-$(ls edit/lib/modules | head -1)
+
 echo "In chroot: Delete temporary files..."
 ( cd /etc ; sudo rm resolv.conf ; sudo ln -s ../run/systemd/resolve/stub-resolv.conf resolv.conf )
-
-echo "In chroot: Clearing apt cache..."
-sudo apt-get -y autoremove && sudo apt-get autoclean
 
 echo "In chroot: Clearing cache files..."
 rm -rf /tmp/*
 sudo rm /etc/apt/sources.list.save
 sudo rm /etc/{group-,gshadow-,passwd-,shadow-}
 sudo rm -rf /var/cache/apparmor/*
+sudo rm /var/cache/app-info/cache/en_US.cache
 sudo rm /var/cache/debconf/{config.dat-old,templates.dat-old}
 sudo rm /var/cache/apt/*.bin
 sudo rm /var/cache/apt/archives/*.deb
@@ -93,10 +98,14 @@ sudo umount -lfr edit/sys
 sudo umount -lfr edit/dev
 sudo umount -lfr edit/run
 
+ls edit/lib/modules
+ls edit/boot
+
 echo "Copying initramfs to casper..."
-sudo rm extract-cd/casper/initrd
-sudo cp edit/boot/initrd.img-$(ls edit/lib/modules) extract-cd/casper/initrd
-sudo rm edit/boot/initrd.img-*
+sudo rm extract-cd/casper/{initrd,vmlinuz}
+sudo cp edit/boot/initrd.img-$(ls edit/lib/modules | tail -1) extract-cd/casper/initrd
+sudo cp edit/boot/vmlinuz-$(ls edit/lib/modules | tail -1) extract-cd/casper/vmlinuz
+sudo rm edit/boot/{initrd.img-*,vmlinuz-*}
 
 echo "Repacking..."
 
@@ -118,7 +127,7 @@ HERE
 
 cd extract-cd 	
 sudo xorriso -as mkisofs \
-	-V "Unity Remix 18.04.3 LTS amd64" \
+	-V "Unity Remix 20.04 LTS amd64" \
 	-isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
 	-c isolinux/boot.cat \
 	-b isolinux/isolinux.bin \
@@ -129,7 +138,7 @@ sudo xorriso -as mkisofs \
 	-e boot/grub/efi.img \
 	-no-emul-boot \
 	-isohybrid-gpt-basdat \
-	-o ../unity-remix-18.04.3-desktop-amd64.iso \
+	-o ../unity-remix-focal-desktop-amd64.iso \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
@@ -138,8 +147,9 @@ cd ..
 rm original.iso
 
 # Write update information for use by AppImageUpdate; https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
-echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*amd64.iso.zsync" | dd of="unity-remix-18.04.3-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
+echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*20.04*.iso.zsync" | dd of="unity-remix-20.04-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
 
 # Write zsync file
 zsyncmake *.iso
 
+ls -lh *.iso
