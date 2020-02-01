@@ -127,10 +127,8 @@ HERE
 
 cd extract-cd 	
 sudo xorriso -as mkisofs \
-    -rock -omit-version-number \
-    -disable-deep-relocation \
-    -joliet -allow-leading-dots \
-    -volid "Unity Remix 20.04 LTS amd64" \
+	-V "Unity Remix 20.04 LTS amd64" \
+	-isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
 	-c isolinux/boot.cat \
 	-b isolinux/isolinux.bin \
 	-no-emul-boot \
@@ -139,7 +137,8 @@ sudo xorriso -as mkisofs \
 	-eltorito-alt-boot \
 	-e boot/grub/efi.img \
 	-no-emul-boot \
-	-o ../unity-remix-20.04-desktop-amd64.iso \
+	-isohybrid-gpt-basdat \
+	-o ../unity-remix-focal-desktop-amd64.iso \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
