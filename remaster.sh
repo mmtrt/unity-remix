@@ -138,7 +138,7 @@ sudo xorriso -as mkisofs \
 	-e boot/grub/efi.img \
 	-no-emul-boot \
 	-isohybrid-gpt-basdat \
-	-o ../unity-remix-focal-desktop-amd64.iso \
+	-o ../unity-remix-20.04-desktop-amd64.iso \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
