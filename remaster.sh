@@ -107,6 +107,10 @@ sudo cp edit/boot/initrd.img-$(ls edit/lib/modules | tail -1) extract-cd/casper/
 sudo cp edit/boot/vmlinuz-$(ls edit/lib/modules | tail -1) extract-cd/casper/vmlinuz
 sudo rm edit/boot/{initrd.img-*,vmlinuz-*}
 
+echo "Removing nvidia driver pkgs..."
+sudo rm -rf extract-cd/pool/restricted/n
+sudo rm -rf extract-cd/pool/main/n/nvidia*
+
 echo "Repacking..."
 
 sudo chmod +w extract-cd/casper/filesystem.manifest
