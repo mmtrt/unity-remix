@@ -111,10 +111,6 @@ echo "Removing nvidia driver pkgs..."
 sudo rm -rf extract-cd/pool/restricted/n
 sudo rm -rf extract-cd/pool/main/n/nvidia*
 
-echo "fix booting casper"
-sudo sed -i 's|ubuntu.seed|ubuntu.seed boot=casper|g' extract-cd/boot/grub/grub.cfg
-sudo sed -i 's|ubuntu.seed|ubuntu.seed boot=casper|g' extract-cd/boot/grub/loopback.cfg
-
 echo "Repacking..."
 
 sudo chmod +w extract-cd/casper/filesystem.manifest
