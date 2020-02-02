@@ -22,6 +22,12 @@ sudo apt-get autoremove --purge -f -q -y language-pack-de-base language-pack-de 
 echo "In chroot: removing hyphen-xx..."
 sudo apt-get autoremove --purge -f -q -y hyphen-de hyphen-en-ca hyphen-en-gb hyphen-es hyphen-fr hyphen-it hyphen-pt-br hyphen-pt-pt hyphen-ru
 
+echo "In chroot: removing gnome-getting-started-docs-xx"
+sudo apt-get autoremove --purge -f -q -y gnome-getting-started-docs-de gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-it gnome-getting-started-docs-pt gnome-getting-started-docs-ru
+
+echo "In chroot: removing gnome-user-docs-xx"
+sudo apt-get autoremove --purge -f -q -y gnome-user-docs-de gnome-user-docs-es gnome-user-docs-fr gnome-user-docs-it gnome-user-docs-pt gnome-user-docs-ru gnome-user-docs-zh-hans
+
 echo "In chroot: removing web launchers..."
 sudo apt-get autoremove --purge -f -q -y ubuntu-web-*
 
