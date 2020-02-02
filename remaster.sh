@@ -127,7 +127,7 @@ HERE
 
 cd extract-cd 	
 sudo xorriso -as mkisofs \
-	-V "Unity Remix focal LTS amd64" \
+	-V "Unity Remix 20.04 LTS amd64" \
 	-isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
 	-c isolinux/boot.cat \
 	-b isolinux/isolinux.bin \
@@ -138,7 +138,7 @@ sudo xorriso -as mkisofs \
 	-e boot/grub/efi.img \
 	-no-emul-boot \
 	-isohybrid-gpt-basdat \
-	-o ../unity-remix-focal-desktop-amd64.iso \
+	-o ../unity-remix-20.04-desktop-amd64.iso \
        "../extract-cd"
 sudo chown -R $USER ../*iso
 
@@ -147,7 +147,7 @@ cd ..
 rm original.iso
 
 # Write update information for use by AppImageUpdate; https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
-echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*focal*.iso.zsync" | dd of="unity-remix-focal-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
+echo "gh-releases-zsync|mmtrt|unity-remix|latest|unity-*20.04*.iso.zsync" | dd of="unity-remix-20.04-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
 
 # Write zsync file
 zsyncmake *.iso
