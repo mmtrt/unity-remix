@@ -132,7 +132,6 @@ HERE
 cd extract-cd 	
 sudo xorriso -as mkisofs \
 	-V "Unity Remix 20.04 LTS amd64" \
-	-J -joliet-long \
 	-isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
 	-c isolinux/boot.cat \
 	-b isolinux/isolinux.bin \
