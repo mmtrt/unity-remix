@@ -4,11 +4,17 @@
 
 # echo "# Remastered" >> /etc/os-release # Don't do this, it disturbs add-apt-repository
 
-echo "In chroot: removing libreoffice-help-xx..."
-sudo apt-get autoremove --purge -f -q -y libreoffice-help-de libreoffice-help-en-gb libreoffice-help-es libreoffice-help-fr libreoffice-help-it libreoffice-help-pt-br libreoffice-help-pt libreoffice-help-ru libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-l10n-es libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt-br libreoffice-l10n-pt libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw
+echo "In chroot: removing preinstalled apps & games..."
+sudo apt-get autoremove --purge -f -q -y rhythmbox* remmina* totem* transmission* aisleriot* gnome-mahjongg* gnome-mines* gnome-sudoku* simple-scan* gnome-todo* baobab* deja-dup* gnome-calendar* example-content* usb-creator-gtk* thunderbird* mozc* geary* synaptic* gnome-logs gnome-system-log
+
+echo "In chroot: removing libreoffice..."
+sudo apt-get autoremove --purge -f -q -y libreoffice*
 
 echo "In chroot: removing firefox-locale-xx..."
-sudo apt-get autoremove --purge -f -q -y firefox-locale-de firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans thunderbird-locale-de thunderbird-locale-en-gb thunderbird-locale-es-ar thunderbird-locale-es-es thunderbird-locale-es thunderbird-locale-fr thunderbird-locale-it thunderbird-locale-pt-br thunderbird-locale-pt-pt thunderbird-locale-pt thunderbird-locale-ru thunderbird-locale-zh-cn thunderbird-locale-zh-hans thunderbird-locale-zh-hant thunderbird-locale-zh-tw
+sudo apt-get autoremove --purge -f -q -y firefox-locale-de firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans
+
+echo "In chroot: removing thunderbird..."
+sudo apt-get autoremove --purge -f -q -y thunderbird*
 
 echo "In chroot: removing mythes-xx..."
 sudo apt-get autoremove --purge -f -q -y mythes-de-ch mythes-de mythes-en-au mythes-es mythes-fr mythes-it mythes-pt-pt mythes-ru
