@@ -3,7 +3,7 @@
 sudo apt-get update && sudo apt-get -y install isolinux genisoimage squashfs-tools xorriso zsync
 
 echo "Download the ISO to be customized..."
-URL=http://cdimage.ubuntu.com/daily-live/current/focal-desktop-amd64.iso
+URL=https://releases.ubuntu.com/focal/ubuntu-20.04.1-desktop-amd64.iso
 wget "$URL" --progress=dot -e dotbytes=100M
 
 mv *.iso original.iso
