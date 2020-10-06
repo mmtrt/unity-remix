@@ -78,8 +78,3 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
 
 ### Calculate sha256 sums of built ISO
 sha256sum "${ROOT_PATH}"/*.iso >"${ROOT_PATH}/output/sha256"
-
-find ./ | grep ".iso"
-find ./ | grep ".zip"
-
-exit "${livecd_exitcode}"
