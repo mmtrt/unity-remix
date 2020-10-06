@@ -11,7 +11,7 @@ script:
 
 after_success:
   - wget -c https://raw.githubusercontent.com/probonopd/uploadtool/8142d461aba7b92a058116fe5ee75be438b75fa4/upload.sh
-  - bash upload.sh ./{*.iso*,sha256sum}
+  - bash upload.sh unity*.iso sha256
   
 branches:
   except:
