@@ -1,5 +1,5 @@
 os: linux
-dist: bionic
+dist: focal
 language: generic
 sudo: required
 
@@ -7,11 +7,11 @@ git:
   depth: 1
 
 script:
-  - bash -ex ./remaster.sh |& tee log.txt
+  - bash -ex ./build.sh |& tee log.txt
 
 after_success:
   - wget -c https://raw.githubusercontent.com/probonopd/uploadtool/8142d461aba7b92a058116fe5ee75be438b75fa4/upload.sh
-  - bash upload.sh *.iso*
+  - bash upload.sh ./output/{*.iso*,sha256sum}
   
 branches:
   except:
