@@ -76,7 +76,6 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
 
 #   zip -s 1500m "${ROOT_PATH}/output/livecd.zip" "${ROOT_PATH}/unity-remix-20.04-desktop-amd64.iso"
 
-done
 ### Calculate sha256 sums of built ISO
 sha256sum "${ROOT_PATH}"/*.iso >"${ROOT_PATH}/output/sha256"
 
