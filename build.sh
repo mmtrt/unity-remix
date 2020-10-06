@@ -74,7 +74,7 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
   # Write update information for use by AppImageUpdate; https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
   echo "gh-releases-zsync|mmtrt|unity-remix|continuous|unity-*20.04*.iso.zsync" | dd of="unity-remix-20.04-desktop-amd64.iso" bs=1 seek=33651 count=512 conv=notrunc
 
-  zip -s 1500m "${ROOT_PATH}/output/livecd.zip" "${ROOT_PATH}/unity-remix-20.04-desktop-amd64.iso"
+#   zip -s 1500m "${ROOT_PATH}/output/livecd.zip" "${ROOT_PATH}/unity-remix-20.04-desktop-amd64.iso"
 
 done
 ### Calculate sha256 sums of built ISO
