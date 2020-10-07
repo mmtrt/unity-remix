@@ -25,7 +25,7 @@ deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted universe
 EOF
 apt-get update
 
-echo >&2 "===]> Info: Install systemd and Ubuntu MBP Repo... "
+echo >&2 "===]> Info: Install systemd... "
 
 apt-get install -y systemd-sysv gnupg curl wget
 
