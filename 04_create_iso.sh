@@ -3,7 +3,7 @@ set -eu -o pipefail
 
 cd "${IMAGE_PATH}"
 ### Generate md5sum.txt. Generate it two times, to get the own checksum right.
-(find . -type f -not -name md5sum.txt -print0 | xargs -0 -- md5sum >"${IMAGE_PATH}/md5sum.txt")
+(find . -type f \( ! -iname "*.txt" ! -iname "*.diskdef*" ! -name ubuntu \) -print0 | xargs -0 md5sum >"md5sum.txt")
 
 echo >&2 "===]> Info: Create Isolinux... "
 xorriso -as mkisofs \
