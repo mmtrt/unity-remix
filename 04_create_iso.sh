@@ -15,8 +15,6 @@ xorriso -as mkisofs \
   -boot-load-size 4 \
   -boot-info-table \
   -c boot/grub/boot.cat \
-  --grub2-boot-info \
-  --grub2-mbr "/usr/lib/grub/i386-pc/boot_hybrid.img" \
   -eltorito-alt-boot \
   -e "EFI/efiboot.img" \
   -no-emul-boot \
