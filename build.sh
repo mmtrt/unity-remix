@@ -82,4 +82,4 @@ zsyncmake *.iso
 #   zip -s 1500m "${ROOT_PATH}/output/livecd.zip" "${ROOT_PATH}/unity-remix-20.04-desktop-amd64.iso"
 
 ### Calculate sha256 sums of built ISO
-sha256sum "${ROOT_PATH}"/*.iso* >"${ROOT_PATH}/sha256"
+sha256sum *.iso* > sha256
