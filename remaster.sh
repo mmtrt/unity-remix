@@ -98,14 +98,14 @@ echo "Prepare chroot..."
 # sudo umount -lfr edit/dev
 # sudo umount -lfr edit/run
 
-ls edit/lib/modules
-ls edit/boot
+# ls edit/lib/modules
+# ls edit/boot
 
 echo "Copying initramfs to casper..."
 sudo rm extract-cd/casper/{initrd,vmlinuz}
 # sudo cp edit/boot/initrd.img-$(ls edit/lib/modules | tail -1) extract-cd/casper/initrd
 # sudo cp edit/boot/vmlinuz-$(ls edit/lib/modules | tail -1) extract-cd/casper/vmlinuz
-sudo rm edit/boot/{initrd.img-*,vmlinuz-*}
+# sudo rm edit/boot/{initrd.img-*,vmlinuz-*}
 
 echo "Removing nvidia driver pkgs..."
 sudo rm -rf extract-cd/pool/
