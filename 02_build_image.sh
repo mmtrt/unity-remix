@@ -15,7 +15,7 @@ cp "${CHROOT_PATH}"/boot/initrd.img-"$(ls $CHROOT_PATH/lib/modules | tail -1)" "
 echo >&2 "===]> Info: Grub configuration... "
 # we add an empty file to use it with the search command in grub later on.
 touch "${IMAGE_PATH}"/ubuntu
-cp "${ROOT_PATH}/files/grub/grub.cfg" "${IMAGE_PATH}"/isolinux/grub.cfg
+cp -Rvp "${ROOT_PATH}/files/{boot,EFI,isolinux}" "${IMAGE_PATH}"/
 
 
 echo >&2 "===]> Info: Compress the chroot... "
