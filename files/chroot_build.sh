@@ -51,7 +51,6 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
   resolvconf \
   net-tools \
   wireless-tools \
-  wpagui \
   locales \
   initramfs-tools \
   binutils \
