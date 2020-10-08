@@ -10,13 +10,13 @@ xorriso -as mkisofs \
   -iso-level 3 \
   -full-iso9660-filenames \
   -volid "UNITY_RMX" \
-  -b isolinux/isolinux.bin \
+  -b "${IMAGE_PATH}"/isolinux/isolinux.bin \
   -no-emul-boot \
   -boot-load-size 4 \
   -boot-info-table \
-  -c isolinux/boot.cat \
+  -c "${IMAGE_PATH}"/isolinux/boot.cat \
   -eltorito-alt-boot \
-  -e boot/grub/efi.img \
+  -e "${IMAGE_PATH}"/boot/grub/efi.img \
   -no-emul-boot \
   -isohybrid-mbr "${ROOT_PATH}/files/isohdpfx.bin" \
   -isohybrid-gpt-basdat \
