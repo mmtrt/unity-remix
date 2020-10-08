@@ -50,12 +50,12 @@ echo >&2 "===]> Info: Build Image... "
    ${ROOT_PATH}/02_build_image.sh
 "
 
-echo >&2 "===]> Info: Prepare Boot for ISO... "
- /bin/bash -c "
-   IMAGE_PATH=${IMAGE_PATH} \\
-   CHROOT_PATH=${CHROOT_PATH} \\
-   ${ROOT_PATH}/03_prepare_iso.sh
-"
+# echo >&2 "===]> Info: Prepare Boot for ISO... "
+#  /bin/bash -c "
+#    IMAGE_PATH=${IMAGE_PATH} \\
+#    CHROOT_PATH=${CHROOT_PATH} \\
+#    ${ROOT_PATH}/03_prepare_iso.sh
+# "
 
 echo >&2 "===]> Info: Create ISO... "
  /bin/bash -c "
