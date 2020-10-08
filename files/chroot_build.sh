@@ -63,9 +63,24 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
 echo >&2 "===]> Info: Install window manager... "
 
 apt-get install --no-install-recommends --no-install-suggests -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
+  indicator-applet \
+  indicator-application \
+  indicator-appmenu \ 
+  indicator-bluetooth \
+  indicator-common \
+  indicator-datetime \
+  indicator-keyboard \
+  indicator-messages \
+  indicator-power \
+  indicator-printers \
+  indicator-session \
+  indicator-sound \
   plymouth-theme-ubuntu-logo \
   ubuntu-unity-desktop \
-  ubuntu-gnome-wallpapers
+  unity-lens-applications \
+  unity-lens-files \
+  zeitgeist-core \
+  zeitgeist-datahub
 
 echo >&2 "===]> Info: Install Graphical installer... "
 
