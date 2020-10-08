@@ -132,16 +132,6 @@ sudo rm -rf extract-cd/pool/
 cd extract-cd 	
 sudo xorriso -as mkisofs \
 	-V "Unity Remix 20.04 LTS amd64" \
-	-isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
-	-c isolinux/boot.cat \
-	-b isolinux/isolinux.bin \
-	-no-emul-boot \
-	-boot-load-size 4 \
-	-boot-info-table \
-	-eltorito-alt-boot \
-	-e boot/grub/efi.img \
-	-no-emul-boot \
-	-isohybrid-gpt-basdat \
 	-o ../unity-remix-20.04-desktop-amd64.iso \
        "../extract-cd"
 sudo chown -R $USER ../*iso
