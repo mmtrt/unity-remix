@@ -10,18 +10,14 @@ xorriso -as mkisofs \
   -iso-level 3 \
   -full-iso9660-filenames \
   -volid "UNITY_RMX" \
-  -b boot/grub/bios.img \
+  -b isolinux/isolinux.bin \
   -no-emul-boot \
   -boot-load-size 4 \
   -boot-info-table \
-  -c boot/grub/boot.cat \
+  -c isolinux/boot.cat \
   -eltorito-alt-boot \
-  -e "EFI/efiboot.img" \
+  -e boot/grub/efi.img \
   -no-emul-boot \
   -isohybrid-mbr "${ROOT_PATH}/files/isohdpfx.bin" \
   -isohybrid-gpt-basdat \
-  -output "${ROOT_PATH}/unity-remix-20.04-desktop-amd64.iso" \
-  -graft-points \
-  "." \
-  /boot/grub/bios.img=isolinux/bios.img \
-  /EFI/efiboot.img=isolinux/efiboot.img
+  -output "${ROOT_PATH}/unity-remix-20.04-desktop-amd64.iso"
